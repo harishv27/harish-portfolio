@@ -1,0 +1,1646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harish V</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #2563eb;
+    --secondary-color: #1e293b;
+    --accent-color: #06b6d4;
+    --text-primary: #0f172a;
+    --text-secondary: #64748b;
+    --text-light: #94a3b8;
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --bg-card: #ffffff;
+    --border-color: #e2e8f0;
+    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+    --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --gradient-accent: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+    --transition: all 0.3s ease;
+}
+
+[data-theme="dark"] {
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --text-light: #94a3b8;
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --bg-card: #334155;
+    --border-color: #475569;
+    --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.3);
+    --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.3);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+    transition: var(--transition);
+}
+
+/* Navigation */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border-color);
+    z-index: 1000;
+    padding: 1rem 0;
+    transition: var(--transition);
+}
+
+[data-theme="dark"] .navbar {
+    background: rgba(15, 23, 42, 0.95);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-weight: 500;
+    transition: var(--transition);
+    position: relative;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--primary-color);
+}
+
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -0.5rem;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--gradient-accent);
+    border-radius: 1px;
+}
+
+/* Theme Toggle */
+.theme-toggle {
+    position: relative;
+    width: 60px;
+    height: 30px;
+    background: var(--border-color);
+    border-radius: 15px;
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+    outline: none;
+}
+
+.theme-toggle::before {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 24px;
+    height: 24px;
+    background: var(--bg-primary);
+    border-radius: 50%;
+    transition: var(--transition);
+    box-shadow: var(--shadow);
+}
+
+[data-theme="dark"] .theme-toggle {
+    background: var(--primary-color);
+}
+
+[data-theme="dark"] .theme-toggle::before {
+    transform: translateX(30px);
+}
+
+.theme-toggle-icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.8rem;
+    transition: var(--transition);
+}
+
+.sun-icon {
+    left: 6px;
+    opacity: 1;
+}
+
+.moon-icon {
+    right: 6px;
+    opacity: 0.5;
+}
+
+[data-theme="dark"] .sun-icon {
+    opacity: 0.5;
+}
+
+[data-theme="dark"] .moon-icon {
+    opacity: 1;
+}
+
+/* Mobile Menu */
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-primary);
+}
+
+/* Hero Section */
+.hero {
+    margin-top: 80px;
+    padding: 4rem 0;
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--border-color) 100%);
+    transition: var(--transition);
+}
+
+.hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-content .subtitle {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+
+.hero-content p {
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    line-height: 1.7;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 0.75rem 2rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 600;
+    transition: var(--transition);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: var(--gradient-accent);
+    color: white;
+    box-shadow: var(--shadow);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.btn-secondary {
+    background: var(--bg-card);
+    color: var(--text-primary);
+    border: 2px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.btn-download {
+    background: var(--gradient);
+    color: white;
+    box-shadow: var(--shadow);
+}
+
+.btn-download:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+}
+
+.hero-image {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-card {
+    background: var(--bg-card);
+    padding: 2rem;
+    border-radius: 2rem;
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+    max-width: 300px;
+    border: 1px solid var(--border-color);
+    transition: var(--transition);
+}
+
+.profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 1rem;
+    border: 4px solid var(--bg-secondary);
+}
+
+.contact-info {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 0.25rem;
+    transition: var(--transition);
+}
+
+.contact-item:hover {
+    background: var(--bg-secondary);
+    color: var(--primary-color);
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.social-link {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--bg-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--text-secondary);
+    transition: var(--transition);
+    border: 1px solid var(--border-color);
+}
+
+.social-link:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Main Content */
+.main-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.section {
+    margin-bottom: 5rem;
+    padding: 4rem 0;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 3rem;
+    text-align: center;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.about-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.about-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+/* Resume Section */
+.resume-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.resume-header {
+    text-align: center;
+    background: var(--bg-card);
+    padding: 3rem 2rem;
+    border-radius: 1rem;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+    margin-bottom: 2rem;
+}
+
+.resume-section {
+    background: var(--bg-card);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+    margin-bottom: 2rem;
+}
+
+.resume-section h3 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.education-item, .experience-item {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.education-item:last-child, .experience-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.item-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.item-date {
+    color: var(--accent-color);
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.item-subtitle {
+    color: var(--text-secondary);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.item-description {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.skill-category {
+    background: var(--bg-secondary);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border-color);
+}
+
+.skill-category h4 {
+    font-size: 1.1rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.skill-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.skill-tag {
+    background: var(--bg-card);
+    color: var(--text-primary);
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.8rem;
+    border: 1px solid var(--border-color);
+}
+
+.achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.achievement-card {
+    background: var(--bg-secondary);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.achievement-icon {
+    width: 60px;
+    height: 60px;
+    background: var(--gradient-accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.achievement-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.achievement-description {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.download-section {
+    text-align: center;
+    padding: 2rem;
+    background: var(--bg-card);
+    border-radius: 1rem;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+    margin-top: 2rem;
+}
+
+/* Projects Grid */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.project-card {
+    background: var(--bg-card);
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+    transition: var(--transition);
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.project-image {
+    width: 100%;
+    height: 200px;
+    background: var(--gradient-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 3rem;
+}
+
+.project-content {
+    padding: 2rem;
+}
+
+.project-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.project-category {
+    color: var(--accent-color);
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+.project-description {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.tech-tag {
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.8rem;
+    border: 1px solid var(--border-color);
+}
+
+/* Certificates Grid */
+.certificates-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.certificate-card {
+    background: var(--bg-card);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+    text-align: center;
+    transition: var(--transition);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.certificate-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+.certificate-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    transition: var(--transition);
+}
+
+.certificate-card:hover .certificate-image {
+    transform: scale(1.05);
+}
+
+.certificate-icon {
+    width: 80px;
+    height: 80px;
+    background: var(--gradient-accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    color: white;
+    font-size: 2rem;
+}
+
+.certificate-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.certificate-issuer {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+.certificate-description {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.certificate-overlay {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: var(--primary-color);
+    color: white;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.8rem;
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.certificate-card:hover .certificate-overlay {
+    opacity: 1;
+}
+
+/* Contact Form */
+.contact-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+}
+
+.contact-info-section {
+    background: var(--bg-card);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+}
+
+.contact-info-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    transition: var(--transition);
+    text-decoration: none;
+}
+
+.contact-info-item:hover {
+    background: var(--bg-secondary);
+    color: var(--primary-color);
+    transform: translateX(5px);
+}
+
+.contact-form {
+    background: var(--bg-card);
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border-color);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.form-input,
+.form-textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid var(--border-color);
+    border-radius: 0.5rem;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: var(--transition);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+.form-input:focus,
+.form-textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.map-container {
+    width: 100%;
+    height: 300px;
+    border-radius: 1rem;
+    overflow: hidden;
+    margin-top: 2rem;
+    border: 1px solid var(--border-color);
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    filter: var(--map-filter);
+}
+
+[data-theme="dark"] .map-container iframe {
+    filter: hue-rotate(180deg) invert(90%);
+}
+
+/* Loading spinner */
+.loading-spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--border-color);
+    border-top: 2px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    display: none;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Success message */
+.success-message {
+    background: #10b981;
+    color: white;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+    display: none;
+    text-align: center;
+}
+
+/* Error message */
+.error-message {
+    background: #ef4444;
+    color: white;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+    display: none;
+    text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+
+    .mobile-menu-btn {
+        display: block;
+    }
+
+    .hero-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .contact-section {
+        grid-template-columns: 1fr;
+    }
+
+    .cta-buttons {
+        justify-content: center;
+    }
+
+    .item-header {
+        flex-direction: column;
+        align-items: start;
+    }
+
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-container,
+    .main-content {
+        padding: 0 1rem;
+    }
+
+    .hero {
+        padding: 2rem 0;
+    }
+
+    .hero-container {
+        padding: 0 1rem;
+        gap: 2rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .resume-section {
+        padding: 1.5rem;
+    }
+}
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">Harish V</div>
+            <div class="nav-right">
+                <ul class="nav-links">
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#resume" class="nav-link">Resume</a></li>
+                    <li><a href="#projects" class="nav-link">Projects</a></li>
+                    <li><a href="#certificates" class="nav-link">Certificates</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+                <button class="theme-toggle" id="themeToggle">
+                    <span class="theme-toggle-icon sun-icon">☀️</span>
+                    <span class="theme-toggle-icon moon-icon">🌙</span>
+                </button>
+                <button class="mobile-menu-btn">☰</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>AI/ML Engineer</h1>
+                <p class="subtitle">Transforming ideas into intelligent solutions</p>
+                <p>Currently pursuing M.Sc. in Artificial Intelligence and Machine Learning at VIT Vellore. Passionate about building innovative AI/ML solutions with 10+ projects in computer vision, NLP, and mobile applications.</p>
+                <div class="cta-buttons">
+                    <a href="#projects" class="btn btn-primary">View Projects</a>
+                    <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="profile-card">
+                    <img src=".\assets\images\image.jpg" alt="Harish V" class="profile-image">
+                    <h3>Harish V</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">M.Sc. AI/ML Student</p>
+                    
+                    <div class="contact-info">
+                        <div class="contact-item" onclick="window.location.href='mailto:hariakash2712@gmail.com'">
+                            <span>📧</span>
+                            <span>hariakash2712@gmail.com</span>
+                        </div>
+                        <div class="contact-item" onclick="window.location.href='tel:+917548826193'">
+                            <span>📱</span>
+                            <span>+91 7548826193</span>
+                        </div>
+                        <div class="contact-item" onclick="window.open('https://www.google.com/maps/search/Vellore,+Tamil+Nadu,+India', '_blank')">
+                            <span>📍</span>
+                            <span>Vellore, Tamil Nadu</span>
+                        </div>
+                        <div class="contact-item">
+                            <span>🎂</span>
+                            <span>Dec 27, 2004</span>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://github.com/harishv27" class="social-link" target="_blank">
+                            <i class="fab fa-github" style="font-size: 1.5rem;"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/harishv27/" class="social-link" target="_blank">
+                            <i class="fab fa-linkedin" style="font-size: 1.5rem; color: #0077b5;"></i>
+                        </a>
+                        <a href="https://leetcode.com/u/HarishV12/" class="social-link" target="_blank">
+                            <i class="fa-solid fa-code" style="font-size: 1.5rem; color: #ffa116;"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- About Section -->
+        <section id="about" class="section">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <p class="about-text">
+                    I am currently pursuing an M.Sc. in Artificial Intelligence and Machine Learning (1st year) at VIT Vellore, 
+                    where I also completed my BCA with a CGPA of 8.37. I have practical experience in developing projects using 
+                    machine learning, deep learning, and Android app development.
+                </p>
+                <p class="about-text">
+                    I am actively seeking internship opportunities in AI/ML where I can apply my skills, gain hands-on experience, 
+                    and continue to grow professionally. My focus areas include neural network architectures, computer vision, 
+                    natural language processing, and mobile application integration with AI systems.
+                </p>
+            </div>
+        </section>
+
+        <!-- Resume Section -->
+        <section id="resume" class="section">
+            <h2 class="section-title">Resume</h2>
+            <div class="resume-container">
+                
+                <!-- Education -->
+                <div class="resume-section">
+                    <h3>Education</h3>
+                    <div class="education-item">
+                        <div class="item-header">
+                            <div>
+                                <div class="item-title">M.Sc. in Artificial Intelligence and Machine Learning</div>
+                                <div class="item-subtitle">Vellore Institute of Technology, Vellore</div>
+                            </div>
+                            <div class="item-date">2025 — Present</div>
+                        </div>
+                        <div class="item-description">
+                            Currently pursuing 1st year of advanced studies in AI/ML with focus on deep learning, computer vision, 
+                            natural language processing, and practical implementations through hands-on projects and research work.
+                        </div>
+                    </div>
+                    
+                    <div class="education-item">
+                        <div class="item-header">
+                            <div>
+                                <div class="item-title">Bachelor of Computer Application</div>
+                                <div class="item-subtitle">Vellore Institute of Technology, Vellore</div>
+                            </div>
+                            <div class="item-date">2022 — 2025</div>
+                        </div>
+                        <div class="item-description">
+                            Completed with CGPA: 8.37. Built strong foundation in computer science fundamentals, programming, 
+                            and developed initial expertise in AI/ML through various academic and personal projects.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Experience -->
+                <div class="resume-section">
+                    <h3>Experience</h3>
+                    <div class="experience-item">
+                        <div class="item-header">
+                            <div>
+                                <div class="item-title">AI/ML Project Developer</div>
+                                <div class="item-subtitle">Personal Projects</div>
+                            </div>
+                            <div class="item-date">2023 — Present</div>
+                        </div>
+                        <div class="item-description">
+                            Developed 10+ machine learning and deep learning projects including computer vision applications, 
+                            NLP systems, and Android app integrations. Specialized in creating end-to-end AI solutions 
+                            from data preprocessing to model deployment.
+                        </div>
+                    </div>
+                    
+                    <div class="experience-item">
+                        <div class="item-header">
+                            <div>
+                                <div class="item-title">Android & Flutter Developer</div>
+                                <div class="item-subtitle">Freelance Projects</div>
+                            </div>
+                            <div class="item-date">2022 — Present</div>
+                        </div>
+                        <div class="item-description">
+                            Designed and developed cross-platform mobile applications using Android Studio and Flutter 
+                            with integrated AI/ML capabilities. Experience in creating user-friendly interfaces and 
+                            implementing backend services for AI-powered mobile solutions.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skills -->
+                <div class="resume-section">
+                    <h3>Technical Skills</h3>
+                    <div class="skills-grid">
+                        <div class="skill-category">
+                            <h4>Programming Languages</h4>
+                            <div class="skill-list">
+                                <span class="skill-tag">Python</span>
+                                <span class="skill-tag">Java</span>
+                                <span class="skill-tag">JavaScript</span>
+                                <span class="skill-tag">Dart</span>
+                                <span class="skill-tag">SQL</span>
+                            </div>
+                        </div>
+
+                        <div class="skill-category">
+                            <h4>Frontend Technologies</h4>
+                            <div class="skill-list">
+                                <span class="skill-tag">HTML5</span>
+                                <span class="skill-tag">CSS3</span>
+                                <span class="skill-tag">JavaScript</span>
+                                <span class="skill-tag">Bootstrap</span>
+                                <span class="skill-tag">Responsive Design</span>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-category">
+                            <h4>AI/ML Frameworks</h4>
+                            <div class="skill-list">
+                                <span class="skill-tag">TensorFlow</span>
+                                <span class="skill-tag">PyTorch</span>
+                                <span class="skill-tag">Scikit-learn</span>
+                                <span class="skill-tag">OpenCV</span>
+                                <span class="skill-tag">YOLOv8</span>
+                                <span class="skill-tag">Keras</span>
+                            </div>
+                        </div>
+
+                        <div class="skill-category">
+                            <h4>Specializations</h4>
+                            <div class="skill-list">
+                                <span class="skill-tag">Computer Vision</span>
+                                <span class="skill-tag">NLP</span>
+                                <span class="skill-tag">Deep Learning</span>
+                                <span class="skill-tag">Neural Networks</span>
+                                <span class="skill-tag">Generative AI</span>
+                                <span class="skill-tag">Data Science</span>
+                            </div>
+                        </div>
+
+                        <div class="skill-category">
+                            <h4>Mobile Development</h4>
+                            <div class="skill-list">
+                                <span class="skill-tag">Android Studio</span>
+                                <span class="skill-tag">Flutter</span>
+                                <span class="skill-tag">Firebase</span>
+                                <span class="skill-tag">MongoDB</span>
+                                <span class="skill-tag">REST APIs</span>
+                                <span class="skill-tag">SQLite</span>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-category">
+                            <h4>Development & Tools</h4>
+                            <div class="skill-list">
+                                <span class="skill-tag">Flask</span>
+                                <span class="skill-tag">FastAPI</span>
+                                <span class="skill-tag">Git</span>
+                                <span class="skill-tag">Docker</span>
+                                <span class="skill-tag">VS Code</span>
+                                <span class="skill-tag">Colab</span>
+                                <span class="skill-tag">Jupyter</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Achievements -->
+                <div class="resume-section">
+                    <h3>Key Achievements</h3>
+                    <div class="achievements-grid">
+                        <div class="achievement-card">
+                            <div class="achievement-icon">🎓</div>
+                            <div class="achievement-title">Academic Excellence</div>
+                            <div class="achievement-description">
+                                Achieved 8.37 CGPA in BCA and currently pursuing M.Sc. in AI/ML at VIT Vellore
+                            </div>
+                        </div>
+                        
+                        <div class="achievement-card">
+                            <div class="achievement-icon">🚀</div>
+                            <div class="achievement-title">10+ ML Projects</div>
+                            <div class="achievement-description">
+                                Successfully completed diverse machine learning projects in computer vision, NLP, and mobile integration
+                            </div>
+                        </div>
+                        
+                        <div class="achievement-card">
+                            <div class="achievement-icon">🏆</div>
+                            <div class="achievement-title">Technical Certifications</div>
+                            <div class="achievement-description">
+                                Multiple certifications in Python, Generative AI, and Large Language Models from recognized platforms
+                            </div>
+                        </div>
+                        
+                        <div class="achievement-card">
+                            <div class="achievement-icon">💡</div>
+                            <div class="achievement-title">Innovation Focus</div>
+                            <div class="achievement-description">
+                                Developed innovative solutions like Farmer Assistance System and Weapon Detection using cutting-edge AI
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Download Section -->
+                <div class="download-section">
+                    <h3 style="margin-bottom: 1rem; color: var(--primary-color);">Download Resume</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Get the complete PDF version of my resume</p>
+                    <a href="./assets/resume/Harish_V_Resume.pdf" class="btn btn-download" download="Harish_V_Resume.pdf">
+                        <i class="fas fa-download"></i>
+                        Download PDF Resume
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">🌾</div>
+                    <div class="project-content">
+                        <h3 class="project-title">Farmer Assistance System</h3>
+                        <p class="project-category">AI/ML • Android Development</p>
+                        <p class="project-description">
+                            Comprehensive system with Android app and web portal using Flask server and CNN model 
+                            for crop analysis and expert consultation. Enables multimedia communication between 
+                            farmers and agricultural experts.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Flask</span>
+                            <span class="tech-tag">CNN</span>
+                            <span class="tech-tag">Android</span>
+                            <span class="tech-tag">Computer Vision</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">🔍</div>
+                    <div class="project-content">
+                        <h3 class="project-title">Weapon Detection System</h3>
+                        <p class="project-category">Computer Vision • YOLOv8</p>
+                        <p class="project-description">
+                            Real-time weapon detection system using custom dataset and YOLOv8 for accurate 
+                            identification in images and video streams. Implemented for enhanced security 
+                            applications with high accuracy rates.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">YOLOv8</span>
+                            <span class="tech-tag">Computer Vision</span>
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Deep Learning</span>
+                            <span class="tech-tag">OpenCV</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">📱</div>
+                    <div class="project-content">
+                        <h3 class="project-title">Cross-Platform Mobile Apps</h3>
+                        <p class="project-category">Flutter • Mobile Development</p>
+                        <p class="project-description">
+                            Developed multiple cross-platform mobile applications using Flutter with integrated 
+                            AI/ML features. Includes real-time data processing, beautiful UI/UX design, 
+                            and seamless backend integration.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Flutter</span>
+                            <span class="tech-tag">Dart</span>
+                            <span class="tech-tag">Firebase</span>
+                            <span class="tech-tag">REST API</span>
+                            <span class="tech-tag">Android</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">🤖</div>
+                    <div class="project-content">
+                        <h3 class="project-title">ML Projects Portfolio</h3>
+                        <p class="project-category">Machine Learning • Data Science</p>
+                        <p class="project-description">
+                            Collection of 10+ machine learning projects covering image classification, NLP, 
+                            and mobile integration with real-world applications. Demonstrates expertise in 
+                            various ML algorithms and frameworks.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Scikit-learn</span>
+                            <span class="tech-tag">TensorFlow</span>
+                            <span class="tech-tag">NLP</span>
+                            <span class="tech-tag">Data Analysis</span>
+                            <span class="tech-tag">Python</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certificates Section -->
+        <section id="certificates" class="section">
+            <h2 class="section-title">Certifications & Achievements</h2>
+            <div class="certificates-grid">
+                
+                <!-- Certificate with Image - Python -->
+                <div class="certificate-card" onclick="window.open('https://www.udemy.com/certificate/UC-3101d7d4-7f2b-43a2-a18c-12649a2496c4/')">
+                    <div class="certificate-overlay">Click to view</div>
+                    <img src="./assets/images/python.jpg" alt="Python Certificate" class="certificate-image">
+                    <h3 class="certificate-title">Python Programmer: From Scratch to Applications</h3>
+                    <p class="certificate-issuer">Udemy</p>
+                    <p class="certificate-description">
+                        Comprehensive Python programming certification covering advanced programming concepts, 
+                        data structures, algorithms, and practical application development essential for AI/ML projects.
+                    </p>
+                </div>
+
+                <!-- Certificate with Image - Generative AI -->
+                <div class="certificate-card" onclick="window.open('https://www.udemy.com/certificate/UC-3101d7d4-7f2b-43a2-a18c-12649a2496c4/')">
+                    <div class="certificate-overlay">Click to view</div>
+                    <img src="./assets/images/gen.jpg" alt="Generative AI Certificate" class="certificate-image">
+                    <h3 class="certificate-title">Generative AI and Large Language Models</h3>
+                    <p class="certificate-issuer">Udemy</p>
+                    <p class="certificate-description">
+                        Specialized certification focusing on generative AI technologies, large language models, 
+                        and modern AI applications including prompt engineering and model fine-tuning techniques.
+                    </p>
+                </div>
+
+                <!-- Certificate with Image - Flutter & Firebase -->
+                <div class="certificate-card" onclick="window.open('https://www.udemy.com/certificate/UC-4a22350d-7ef2-4640-93a1-fe9616177b35/')">
+                    <div class="certificate-overlay">Click to view</div>
+                    <img src="./assets/images/flutter.jpg" alt="Flutter Firebase Certificate" class="certificate-image">
+                    <h3 class="certificate-title">Flutter & Firebase Chat App: Master Flutter and Firebase</h3>
+                    <p class="certificate-issuer">Udemy</p>
+                    <p class="certificate-description">
+                        Advanced certification in Flutter mobile development with Firebase integration, covering real-time chat applications, 
+                        authentication, cloud database management, and modern mobile app architecture patterns for cross-platform development.
+                    </p>
+                </div>
+
+                <!-- Certificate with Image - NLP Chatbots -->
+                <div class="certificate-card" onclick="window.open('https://www.udemy.com/certificate/UC-b1bd2b1d-a0fe-4ea8-ad85-751477ce7b7b/')">
+                    <div class="certificate-overlay">Click to view</div>
+                    <img src="./assets/images/flutter.jpg" alt="NLP Chatbot Certificate" class="certificate-image">
+                    <h3 class="certificate-title">NLP - Building Your Own Chatbots Using AI</h3>
+                    <p class="certificate-issuer">Udemy</p>
+                    <p class="certificate-description">
+                        Specialized certification in Natural Language Processing and conversational AI, covering chatbot development, 
+                        intent recognition, dialogue management, and AI-powered conversational interfaces using modern NLP frameworks.
+                    </p>
+                </div>
+
+                <div class="certificate-card">
+                    <div class="certificate-icon">🌐</div>
+                    <h3 class="certificate-title">Frontend Web Development</h3>
+                    <p class="certificate-issuer">Self-Learning & Projects</p>
+                    <p class="certificate-description">
+                        Practical expertise in HTML5, CSS3, JavaScript, and React through multiple web development 
+                        projects including responsive design, modern UI/UX principles, and interactive user interfaces.
+                    </p>
+                </div>
+
+
+                <div class="certificate-card">
+                    <div class="certificate-icon">🎓</div>
+                    <h3 class="certificate-title">Academic Excellence - BCA</h3>
+                    <p class="certificate-issuer">VIT Vellore</p>
+                    <p class="certificate-description">
+                        Achieved CGPA of 8.37 in Bachelor of Computer Application, demonstrating consistent 
+                        academic performance and strong foundation in computer science and programming fundamentals.
+                    </p>
+                </div>
+
+                <div class="certificate-card">
+                    <div class="certificate-icon">🚀</div>
+                    <h3 class="certificate-title">10+ ML Projects Achievement</h3>
+                    <p class="certificate-issuer">Personal Portfolio</p>
+                    <p class="certificate-description">
+                        Successfully completed 10+ Machine Learning projects including real-world applications in 
+                        image classification, NLP, computer vision, and mobile integration, demonstrating practical AI/ML expertise.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-section">
+                <div class="contact-info-section">
+                    <h3 style="margin-bottom: 2rem; color: var(--primary-color);">Let's Connect</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 2rem; line-height: 1.6;">
+                        I'm actively seeking internship opportunities in AI/ML. Whether you have a project in mind 
+                        or just want to connect, I'd love to hear from you!
+                    </p>
+                    
+                    <div style="margin-bottom: 2rem;">
+                        <a href="mailto:hariakash2712@gmail.com" class="contact-info-item">
+                            <span style="font-size: 1.2rem;">📧</span>
+                            <span>hariakash2712@gmail.com</span>
+                        </a>
+                        <a href="tel:+917548826193" class="contact-info-item">
+                            <span style="font-size: 1.2rem;">📱</span>
+                            <span>+91 7548826193</span>
+                        </a>
+                        <a href="https://www.google.com/maps/search/Vellore,+Tamil+Nadu,+India" target="_blank" class="contact-info-item">
+                            <span style="font-size: 1.2rem;">📍</span>
+                            <span>Vellore, Tamil Nadu, India</span>
+                        </a>
+                    </div>
+
+                    <div class="social-links" style="justify-content: flex-start; gap: 1rem;">
+                        <a href="https://github.com/harishv27" class="social-link" target="_blank" style="width: 50px; height: 50px;">
+                            <i class="fab fa-github" style="font-size: 1.5rem;"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/harishv27/" class="social-link" target="_blank" style="width: 50px; height: 50px;">
+                            <i class="fab fa-linkedin" style="font-size: 1.5rem;"></i>
+                        </a>
+                        <a href="https://leetcode.com/u/HarishV12/" class="social-link" target="_blank" style="width: 50px; height: 50px;">
+                            <i class="fa-solid fa-code" style="font-size: 1.5rem;"></i>
+                        </a>
+                    </div>
+
+                    <div class="map-container">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62207.515625926446!2d79.09674657910154!3d12.971598800000008!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a52c2b7f466d1a7%3A0xf9b45db4da17b69d!2sVellore%20Institute%20of%20Technology!5e0!3m2!1sen!2sin!4v1647608789441!5m2!1sen!2sin"
+                            loading="lazy"></iframe>
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <h3 style="margin-bottom: 2rem; color: var(--primary-color);">Send a Message</h3>
+                    <form id="contactForm" action="https://formspree.io/f/xqalrpnj" method="POST">
+                        <div class="form-group">
+                            <label for="name" class="form-label">Full Name</label>
+                            <input type="text" id="name" name="name" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" id="email" name="email" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="subject" class="form-label">Subject</label>
+                            <input type="text" id="subject" name="subject" class="form-input" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea id="message" name="message" class="form-textarea" required></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">
+                            <span>Send Message</span>
+                            <span class="loading-spinner"></span>
+                            <span>✈️</span>
+                        </button>
+                    </form>
+                    <div class="success-message" id="successMessage">
+                        Thank you! Your message has been sent successfully.
+                    </div>
+                    <div class="error-message" id="errorMessage">
+                        Sorry, there was an error sending your message. Please try again.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+
+        // Check for saved theme preference or default to 'light' mode
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        body.setAttribute('data-theme', currentTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+
+        // Smooth scrolling for nav links
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    const offsetTop = targetElement.offsetTop - 100; // Account for fixed navbar
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // CTA button smooth scrolling
+        const ctaButtons = document.querySelectorAll('a[href^="#"]');
+        ctaButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = button.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                
+                if (targetElement) {
+                    const offsetTop = targetElement.offsetTop - 100;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Update active nav link based on scroll position
+        function updateActiveNavLink() {
+            const sections = document.querySelectorAll('.section');
+            const scrollPos = window.scrollY + 150;
+
+            sections.forEach(section => {
+                const top = section.offsetTop;
+                const bottom = top + section.offsetHeight;
+                const id = section.getAttribute('id');
+                const navLink = document.querySelector(`.nav-link[href="#${id}"]`);
+
+                if (scrollPos >= top && scrollPos <= bottom) {
+                    navLinks.forEach(link => link.classList.remove('active'));
+                    if (navLink) {
+                        navLink.classList.add('active');
+                    }
+                }
+            });
+        }
+
+        // Enhanced Contact form functionality with Formspree
+        const contactForm = document.getElementById('contactForm');
+        const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
+        const loadingSpinner = document.querySelector('.loading-spinner');
+
+        if (contactForm) {
+            contactForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                // Show loading spinner
+                loadingSpinner.style.display = 'inline-block';
+                const submitButton = contactForm.querySelector('button[type="submit"]');
+                submitButton.disabled = true;
+
+                try {
+                    const formData = new FormData(contactForm);
+                    const response = await fetch(contactForm.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+
+                    if (response.ok) {
+                        // Show success message
+                        successMessage.style.display = 'block';
+                        errorMessage.style.display = 'none';
+                        contactForm.reset();
+                    } else {
+                        throw new Error('Form submission failed');
+                    }
+                } catch (error) {
+                    // Show error message
+                    errorMessage.style.display = 'block';
+                    successMessage.style.display = 'none';
+                } finally {
+                    // Hide loading spinner
+                    loadingSpinner.style.display = 'none';
+                    submitButton.disabled = false;
+                }
+            });
+        }
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all sections for animations
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Add scroll event listener for nav updates
+        window.addEventListener('scroll', updateActiveNavLink);
+        
+        // Initialize active nav link
+        updateActiveNavLink();
+
+        // Mobile menu functionality
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinksContainer = document.querySelector('.nav-links');
+
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinksContainer.style.display = navLinksContainer.style.display === 'flex' ? 'none' : 'flex';
+                navLinksContainer.style.position = 'absolute';
+                navLinksContainer.style.top = '100%';
+                navLinksContainer.style.left = '0';
+                navLinksContainer.style.right = '0';
+                navLinksContainer.style.backgroundColor = 'var(--bg-card)';
+                navLinksContainer.style.flexDirection = 'column';
+                navLinksContainer.style.padding = '1rem';
+                navLinksContainer.style.boxShadow = 'var(--shadow)';
+                navLinksContainer.style.borderRadius = '0 0 1rem 1rem';
+            });
+        }
+
+        // Smooth scrolling for better UX
+        document.documentElement.style.scrollBehavior = 'smooth';
+    </script>
+</body>
+</html>
