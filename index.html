@@ -261,9 +261,14 @@
             box-shadow: 0 4px 14px 0 rgba(6, 182, 212, 0.39);
         }
 
-        .btn-primary:hover {
+        .btn-primary:hover:not(:disabled) {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(6, 182, 212, 0.5);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
         }
 
         .btn-secondary {
@@ -743,29 +748,115 @@
             line-height: 1.6;
         }
 
-        /* Contact Section */
-        .contact-section {
+        /* Improved Contact Section */
+        .contact-card {
             background: var(--bg-card);
             border-radius: 1.5rem;
             padding: 3rem;
             box-shadow: var(--shadow);
             border: 1px solid var(--border-color);
-            text-align: center;
-        }
-        
-        .contact-cta {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
         }
 
-        .contact-buttons {
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+            margin-top: 2.5rem;
+        }
+
+        .contact-info-side {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             gap: 1.5rem;
-            margin-top: 2rem;
-            flex-wrap: wrap;
+        }
+
+        .contact-info-side h3 {
+            font-size: 1.75rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-info-side p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-label {
+            font-weight: 500;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 0.875rem 1.25rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+        }
+
+        .form-textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-submit-btn {
+            width: 100%;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .spinner {
+            display: none;
+            margin-left: 0.5rem;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin { 
+            100% { transform: rotate(360deg); } 
+        }
+
+        .form-message {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            text-align: center;
+            font-weight: 500;
+            display: none;
+        }
+
+        .form-message.success {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .form-message.error {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+            border: 1px solid rgba(239, 68, 68, 0.2);
         }
 
         /* Download Button Container */
@@ -787,6 +878,14 @@
             .timeline-header { flex-direction: column; }
             .item-date { margin-top: 0.5rem; align-self: flex-start; }
             .resume-wrapper { padding: 1.5rem; }
+            
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .contact-card {
+                padding: 2rem 1.5rem;
+            }
         }
     </style>
 </head>
@@ -1139,14 +1238,45 @@
         </section>
 
         <section id="contact" class="section">
-            <div class="contact-section">
-                <h2 class="contact-cta">Ready to build something intelligent?</h2>
-                <p style="color: var(--text-secondary); max-width: 600px; margin: 0 auto;">
-                    I am actively seeking internship and full-time opportunities in AI/ML engineering. My inbox is always open for networking, collaborative projects, or job opportunities.
-                </p>
-                <div class="contact-buttons">
-                    <a href="mailto:harishvelayutham.in@gmail.com" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Send an Email</a>
-                    <a href="https://www.linkedin.com/in/harishv27/" target="_blank" class="btn btn-secondary"><i class="fab fa-linkedin"></i> Connect on LinkedIn</a>
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-card">
+                <div class="contact-wrapper">
+                    <div class="contact-info-side">
+                        <h3>Ready to build something intelligent?</h3>
+                        <p>I am actively seeking internship and full-time opportunities in AI/ML engineering. My inbox is always open for networking, collaborative projects, or job opportunities.</p>
+                        
+                        <div class="contact-buttons" style="justify-content: flex-start; margin-top: 1rem;">
+                            <a href="https://www.linkedin.com/in/harishv27/" target="_blank" class="btn btn-secondary">
+                                <i class="fab fa-linkedin"></i> Connect on LinkedIn
+                            </a>
+                        </div>
+                    </div>
+
+                    <form id="contactForm" action="https://formspree.io/f/xqalrpnj" method="POST" class="contact-form">
+                        <div class="form-group">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" id="name" name="name" class="form-input" placeholder="Your full name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" id="email" name="email" class="form-input" placeholder="Your email address" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea id="message" name="message" class="form-textarea" placeholder="How can I help you?" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary form-submit-btn">
+                            <span><i class="fas fa-paper-plane"></i> Send Message</span>
+                            <i class="fas fa-spinner spinner"></i>
+                        </button>
+                        
+                        <div id="formSuccess" class="form-message success">
+                            <i class="fas fa-check-circle"></i> Message sent successfully! I'll get back to you soon.
+                        </div>
+                        <div id="formError" class="form-message error">
+                            <i class="fas fa-exclamation-circle"></i> Oops! There was a problem sending your message.
+                        </div>
+                    </form>
                 </div>
             </div>
         </section>
@@ -1250,6 +1380,52 @@
                     navLinksContainer.style.padding = '1.5rem';
                     navLinksContainer.style.boxShadow = 'var(--shadow)';
                     navLinksContainer.style.borderBottom = '1px solid var(--border-color)';
+                }
+            });
+        }
+
+        // --- NEW: Formspree AJAX Submission Handling ---
+        const contactForm = document.getElementById('contactForm');
+        
+        if (contactForm) {
+            contactForm.addEventListener('submit', async function(e) {
+                e.preventDefault(); // Prevent standard page reload
+                
+                const submitBtn = contactForm.querySelector('button[type="submit"]');
+                const spinner = contactForm.querySelector('.spinner');
+                const successMsg = document.getElementById('formSuccess');
+                const errorMsg = document.getElementById('formError');
+
+                // Reset states
+                successMsg.style.display = 'none';
+                errorMsg.style.display = 'none';
+                submitBtn.disabled = true;
+                spinner.style.display = 'inline-block';
+
+                try {
+                    const response = await fetch(contactForm.action, {
+                        method: 'POST',
+                        body: new FormData(contactForm),
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+
+                    if (response.ok) {
+                        // Success block
+                        successMsg.style.display = 'block';
+                        contactForm.reset();
+                    } else {
+                        // Error block
+                        errorMsg.style.display = 'block';
+                    }
+                } catch (error) {
+                    // Catch network errors
+                    errorMsg.style.display = 'block';
+                } finally {
+                    // Re-enable button and hide spinner
+                    submitBtn.disabled = false;
+                    spinner.style.display = 'none';
                 }
             });
         }
